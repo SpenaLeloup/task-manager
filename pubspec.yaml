@@ -1,0 +1,47 @@
+name: todo_list
+description: Application To-Do List — Projet Flutter universitaire
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Gestion d'état — séance 7
+  provider: ^6.1.2
+
+  # Persistance légère — séance 10
+  shared_preferences: ^2.3.5
+
+  # Base de données SQLite — séances 11 et 12
+  sqflite: ^2.4.2
+  path: ^1.9.0
+
+  # Notifications locales — séance 13
+  flutter_local_notifications: ^18.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  # Icône de l'application — séance 6
+  flutter_launcher_icons: ^0.14.3
+
+# Configuration de l'icône (séance 6)
+# Décommentez et complétez après avoir placé votre image dans assets/icon/
+# flutter_launcher_icons:
+#   android: true
+#   ios: true
+#   image_path: "assets/icon/app_icon.png"
+#   min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+
+  # Décommentez si vous ajoutez des assets (images, icônes…)
+  # assets:
+  #   - assets/icon/
