@@ -1,5 +1,5 @@
-import 'package:dart_odyssey/dart_odyssey.dart' as dart_odyssey;
+import 'package:dart_odyssey/exercice01.dart' as exercice01;
 
-void main(List<String> arguments) {
-  print('Hello world: ${dart_odyssey.calculate()}!');
+void main() {
+  exercice01.main();
 }
