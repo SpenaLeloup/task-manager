@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Mes tâches')),
-        body: const Center(child: Text('Bienvenue dans votre To-Do List')),
-      ),
+      home: const HomeScreen(),
     );
   }
 }
