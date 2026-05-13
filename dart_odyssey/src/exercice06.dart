@@ -1,4 +1,4 @@
-import 'package:dart_odyssey/classes/journey.dart';
+import 'classes/journey.dart';
 
 void main() {
   print("--- Exercice 06 : POO ---");
