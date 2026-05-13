@@ -50,20 +50,38 @@
 
 ---
 
-## Séance 2 — AAAA-MM-JJ
+## Séance 2 — 2026-05-13
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD3`
+
+**Commits :**
+  - `ce486f5 repparation du journal`
+  - `922050b creation de task_title.dart et trie dans home_screen.dart`
+  - `0bf2342 amelioration du ListTitle`
+  - `34b7fb4 modification du main.dart et reorganisation des fichiers`
+  - `c30f5f5 creation du fichier home_screen.dart`
+  - `c741e01 creation du fichier task.dart`
+  - `f29ab02 debut de l'exercice 3`
+  - `b105910 exercice02 termine`
+  - `78ae0c6 initialisation de la partie 2 de l'exercice 6`
+  - `5d7c0b5 realisation de la partie 01 de l'exercice 6`
+  - `2bd8015 realisation de l'exercice 1`
+  - `70d2b84 initialisation du projet dart_odyssey`
+  - `649d69e journal: sÃ©ance 01`
+  - `2fde604 init: crÃ©ation du projet Flutter To-Do List`
+
+**Fichiers modifiés :** `dart_odyssey/.gitignore`, `dart_odyssey/CHANGELOG.md`, `dart_odyssey/README.md`, `dart_odyssey/analysis_options.yaml`, `dart_odyssey/bin/dart_odyssey.dart`, `dart_odyssey/pubspec.lock`, `dart_odyssey/pubspec.yaml`, `dart_odyssey/src/classes/journey.dart`, `dart_odyssey/src/classes/starship.dart`, `dart_odyssey/src/dart_odyssey.dart` *(+10 fichier(s))*
 
 ### Difficultés rencontrées
-- 
+- La prise en main des widgets
 
 ### Comment j'ai résolu le problème
-- 
+- En essayant plussieurs fois de manières différentes
 
 ### Prévu pour la prochaine séance
-- 
-
+- De faire le TD4
 ---
 
 ## Séance 3 — AAAA-MM-JJ
