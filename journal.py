@@ -48,7 +48,7 @@ def check_prerequisites(branch):
     if not Path(".git").exists():
         _abort("Ce répertoire n'est pas un dépôt Git.")
 
-    if not run("git rev-parse HEAD 2>/dev/null"):
+    if not run("git rev-parse HEAD"):
         _abort(
             "Aucun commit trouvé.",
             "Faites au moins un commit avant de remplir le journal."
