@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import '../models/task.dart';
 import '../widgets/task_tile.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  static final List<Task> _tasks = [
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<Task> _tasks = [
     Task(id: '1', title: 'Apprendre Flutter', isDone: true),
     Task(id: '2', title: 'Créer ma première app', isDone: true),
     Task(id: '3', title: 'Faire les courses'),
@@ -22,7 +27,16 @@ class HomeScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: _tasks.length,
         itemBuilder: (context, index) {
-          return TaskTile(task: _tasks[index]);
+          final task = _tasks[index];
+
+          return TaskTile(
+            task: task,
+            onToggle: () {
+              setState(() {
+                _tasks[index].isDone = !_tasks[index].isDone;
+              });
+            },
+          );
         },
       ),
     );

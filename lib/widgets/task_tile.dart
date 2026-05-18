@@ -3,37 +3,37 @@ import '../models/task.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
-  const TaskTile({super.key, required this.task});
+  final VoidCallback onToggle;
+
+  const TaskTile({super.key, required this.task, required this.onToggle});
 
   @override
   Widget build(BuildContext context) {
-    IconData monIcone;
-    Color? maCouleur;
     TextDecoration monStyleTexte;
+    Color maCouleurTexte;
 
-    if (task.isDone) { 
-      monIcone = Icons.check_circle;
-      maCouleur = Colors.green;
+    if (task.isDone) {
       monStyleTexte = TextDecoration.lineThrough;
+      maCouleurTexte = Colors.grey;
     } else {
-      monIcone = Icons.radio_button_unchecked;
-      maCouleur = Colors.grey;
       monStyleTexte = TextDecoration.none;
+      maCouleurTexte = Colors.black;
     }
 
     return ListTile(
-      leading: Icon(
-        monIcone,
-        color: maCouleur,
+      leading: Checkbox(
+        value: task.isDone,
+        onChanged: (bool? value) {
+          onToggle();
+        },
       ),
       title: Text(
         task.title,
         style: TextStyle(
           decoration: monStyleTexte,
-          color: task.isDone ? Colors.grey : Colors.black,
+          color: maCouleurTexte,
         ),
       ),
-      trailing: const Icon(Icons.chevron_right),
     );
   }
 }
