@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(ctx);
               }
             },
-            child: const Text('Ajouter'), // [cite: 129]
+            child: const Text('Ajouter'),
           ),
         ],
       ),
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             onDismissed: (direction) {
               setState(() {
-                _tasks.removeAt(index); // [cite: 86]
+                _tasks.removeAt(index);
               });
             },
             child: TaskTile(
