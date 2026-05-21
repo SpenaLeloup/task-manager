@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
+import '../screens/task_detail_screen.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
@@ -26,12 +27,23 @@ class TaskTile extends StatelessWidget {
       ),
       title: Text(
         task.title,
-        style: TextStyle(decoration: monStyleTexte, color: maCouleurTexte),
+        style: TextStyle(
+          decoration: monStyleTexte,
+          color: maCouleurTexte,
+        ),
       ),
       trailing: IconButton(
         icon: const Icon(Icons.delete, color: Colors.red),
         onPressed: onDelete,
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TaskDetailScreen(task: task),
+          ),
+        );
+      },
     );
   }
 }

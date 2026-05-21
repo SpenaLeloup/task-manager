@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 import '../widgets/task_tile.dart';
+import 'add_task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,41 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
     Task(id: '5', title: 'Faire du sport'),
   ];
 
-  void _showAddTaskDialog() {
-    final controller = TextEditingController();
+  Future<void> _navigateToAddTask() async {
+    final newTask = await Navigator.pushNamed(context, '/add') as Task?;
 
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Nouvelle tâche'),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: const InputDecoration(hintText: 'Titre de la tâche'),
-        ),
-        actions: [
-          TextButton(
-            // [cite: 109]
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Annuler'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (controller.text.trim().isNotEmpty) {
-                setState(() {
-                  _tasks.add(Task(
-                    id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    title: controller.text.trim(),
-                  ));
-                });
-                Navigator.pop(ctx);
-              }
-            },
-            child: const Text('Ajouter'),
-          ),
-        ],
-      ),
-    );
+    if (newTask != null) {
+      setState(() {
+        _tasks.add(newTask);
+      });
+    }
   }
 
   @override
@@ -98,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showAddTaskDialog,
+        onPressed: _navigateToAddTask,
         child: const Icon(Icons.add),
       ),
     );

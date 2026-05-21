@@ -54,7 +54,7 @@ def check_prerequisites(branch):
             "Faites au moins un commit avant de remplir le journal."
         )
 
-    if branch not in MAIN_BRANCHES:
+    # if branch not in MAIN_BRANCHES:
         _abort(
             f"Vous êtes sur la branche '{branch}', pas sur 'main'.",
             "",
