@@ -150,20 +150,34 @@
 - Découverte et mise en place de la persistance des données locale pour sauvegarder la liste de tâches au redémarrage.
 ---
 
-## Séance 5 — AAAA-MM-JJ
+## Séance 5 — 2026-05-21
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD6`
+
+**Commits :**
+  - `037856e modification du fichier home_screen.dart`
+  - `6c0b44d modification du fichier task_tile.dart`
+  - `7cb8aca modification du fichier task_detail_screen.dart`
+  - `c847658 modification du fichier add_task_screen`
+  - `17a70f9 modification du fichier task.dart`
+  - `f83d9e6 journal: sÃ©ance 4`
+  - `5adfb66 realisation du TD 5 en retard car absence au cours precedent`
+
+**Fichiers modifiés :** `lib/models/task.dart`, `lib/screens/add_task_screen.dart`, `lib/screens/home_screen.dart`, `lib/screens/task_detail_screen.dart`, `lib/widgets/task_tile.dart`
 
 ### Difficultés rencontrées
-- 
+- Complexification du modèle Task avec l'ajout de nouveaux champs comme la description et l'énumération de priorité.
+- Nécessité de réutiliser et d'adapter le même écran (AddTaskScreen) pour gérer deux comportements distincts : l'ajout et l'édition.
 
 ### Comment j'ai résolu le problème
-- 
+- Utilisation d'un enum pour le champ de priorité afin de sécuriser le typage et restreindre les valeurs.
+- Utilisation de la méthode initState() dans AddTaskScreen pour détecter la présence d'une tâche à modifier et pré-remplir automatiquement les champs texte.
+- Intégration de l'opérateur de déversement conditionnel (...[]) dans l'écran de détail pour n'afficher la description que si elle est saisie.
 
 ### Prévu pour la prochaine séance
-- 
-
+- Enfin passer à l'étape de l'implémentation de la persistance des données locale pour sauvegarder la liste de tâches même après la fermeture de l'application.
 ---
 
 ## Séance 6 — AAAA-MM-JJ
