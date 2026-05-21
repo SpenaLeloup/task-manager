@@ -18,18 +18,17 @@ class TaskDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Détails de la tâche :',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Statut :',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Statut : ${task.isDone ? "Terminée" : "En cours"}',
-              style: TextStyle(
-                fontSize: 16,
-                color: task.isDone ? Colors.green : Colors.orange,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            Text(task.isDone ? "Terminée" : "En cours"),
+            if (task.description.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              const Text('Description :',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              const SizedBox(height: 4),
+              Text(task.description),
+            ],
           ],
         ),
       ),

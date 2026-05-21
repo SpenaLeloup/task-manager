@@ -6,12 +6,14 @@ class TaskTile extends StatelessWidget {
   final Task task;
   final VoidCallback onToggle;
   final VoidCallback onDelete;
+  final VoidCallback onEdit;
 
   const TaskTile({
     super.key,
     required this.task,
     required this.onToggle,
     required this.onDelete,
+    required this.onEdit,
   });
 
   @override
@@ -27,21 +29,25 @@ class TaskTile extends StatelessWidget {
       ),
       title: Text(
         task.title,
-        style: TextStyle(
-          decoration: monStyleTexte,
-          color: maCouleurTexte,
-        ),
+        style: TextStyle(decoration: monStyleTexte, color: maCouleurTexte),
       ),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete, color: Colors.red),
-        onPressed: onDelete,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.edit, color: Colors.blue),
+            onPressed: onEdit,
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete, color: Colors.red),
+            onPressed: onDelete,
+          ),
+        ],
       ),
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => TaskDetailScreen(task: task),
-          ),
+          MaterialPageRoute(builder: (context) => TaskDetailScreen(task: task)),
         );
       },
     );

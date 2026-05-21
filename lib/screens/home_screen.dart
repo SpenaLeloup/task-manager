@@ -67,6 +67,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   _tasks.removeAt(index);
                 });
               },
+              onEdit: () async {
+                //
+                final updatedTask = await Navigator.push<Task>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddTaskScreen(taskToEdit: task),
+                  ),
+                );
+
+                if (updatedTask != null) {
+                  setState(() {
+                    _tasks[index] = updatedTask;
+                  });
+                }
+              },
             ),
           );
         },
