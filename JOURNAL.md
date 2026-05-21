@@ -120,20 +120,34 @@
 - Découverte de la persistance des données pour sauvegarder la To-Do List localement.
 ---
 
-## Séance 4 — AAAA-MM-JJ
+## Séance 4 — 2026-05-21
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD5`
+
+**Commits :**
+  - `5adfb66 realisation du TD 5 en retard car absence au cours precedent`
+  - `ebd298a journal: sÃ©ance 3`
+  - `8883920 feat: liste dynamique avec ajout, suppression et complÃ©tion de tÃ¢ches`
+  - `78c503e questions 3 et 4 qui fonctionnent`
+  - `4311c3f correction pour faire fonctionner les questions 1 et 2`
+  - `5893e5f modifications pour les questions 1 et 2`
+
+**Fichiers modifiés :** `android/app/build.gradle.kts`, `android/gradle/wrapper/gradle-wrapper.properties`, `journal.py`, `lib/main.dart`, `lib/screens/add_task_screen.dart`, `lib/screens/home_screen.dart`, `lib/screens/task_detail_screen.dart`, `lib/widgets/task_tile.dart`
 
 ### Difficultés rencontrées
-- 
+- Gestion et résolution des conflits de fusion (merge conflict) sur le fichier `build.gradle.kts` entre `main` et la branche de séance.
+- Gestion et résolution des conflits de fusion (merge conflict) sur le fichier `build.gradle.kts` entre `main` et la branche de séance.
+- Compréhension de la récupération asynchrone des données lors de la fermeture d'un écran
 
 ### Comment j'ai résolu le problème
-- 
+- Résolution du conflit directement dans VS Code en conservant la configuration fonctionnelle de Gradle
+- Utilisation de `Navigator.pushNamed` pour basculer proprement d'un écran à l'autre via les routes nommées.
+- - Implémentation d'une `GlobalKey<FormState>` pour valider le champ texte et bloquer les saisies vides.
 
 ### Prévu pour la prochaine séance
-- 
-
+- Découverte et mise en place de la persistance des données locale pour sauvegarder la liste de tâches au redémarrage.
 ---
 
 ## Séance 5 — AAAA-MM-JJ
