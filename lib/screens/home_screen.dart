@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 import '../widgets/task_tile.dart';
+import 'add_task_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  static final List<Task> _tasks = [
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<Task> _tasks = [
     Task(id: '1', title: 'Apprendre Flutter', isDone: true),
     Task(id: '2', title: 'Créer ma première app', isDone: true),
     Task(id: '3', title: 'Faire les courses'),
@@ -13,17 +19,61 @@ class HomeScreen extends StatelessWidget {
     Task(id: '5', title: 'Faire du sport'),
   ];
 
+  Future<void> _navigateToAddTask() async {
+    final newTask = await Navigator.pushNamed(context, '/add') as Task?;
+
+    if (newTask != null) {
+      setState(() {
+        _tasks.add(newTask);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mes tâches'),
+        title: Text(
+            'Mes tâches (${_tasks.where((t) => !t.isDone).length} restantes)'),
       ),
       body: ListView.builder(
         itemCount: _tasks.length,
         itemBuilder: (context, index) {
-          return TaskTile(task: _tasks[index]);
+          final task = _tasks[index];
+
+          return Dismissible(
+            key: Key(task.id),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 16),
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            onDismissed: (direction) {
+              setState(() {
+                _tasks.removeAt(index);
+              });
+            },
+            child: TaskTile(
+              task: task,
+              onToggle: () {
+                setState(() {
+                  _tasks[index].isDone = !_tasks[index].isDone;
+                });
+              },
+              onDelete: () {
+                setState(() {
+                  _tasks.removeAt(index);
+                });
+              },
+            ),
+          );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _navigateToAddTask,
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -84,20 +84,40 @@
 - De faire le TD4
 ---
 
-## Séance 3 — AAAA-MM-JJ
+## Séance 3 — 2026-05-18
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD3`
+
+**Commits :**
+  - `8883920 feat: liste dynamique avec ajout, suppression et complÃ©tion de tÃ¢ches`
+  - `78c503e questions 3 et 4 qui fonctionnent`
+  - `4311c3f correction pour faire fonctionner les questions 1 et 2`
+  - `5893e5f modifications pour les questions 1 et 2`
+  - `de13b8e journal: sÃ©ance du TD3`
+  - `ce486f5 repparation du journal`
+  - `922050b creation de task_title.dart et trie dans home_screen.dart`
+  - `0bf2342 amelioration du ListTitle`
+  - `34b7fb4 modification du main.dart et reorganisation des fichiers`
+  - `c30f5f5 creation du fichier home_screen.dart`
+  - `c741e01 creation du fichier task.dart`
+
+**Fichiers modifiés :** `android/app/build.gradle.kts`, `android/gradle/wrapper/gradle-wrapper.properties`, `dart_odyssey/bin/dart_odyssey.dart`, `dart_odyssey/src/classes/journey.dart`, `dart_odyssey/src/classes/starship.dart`, `dart_odyssey/src/dart_odyssey.dart`, `dart_odyssey/src/exercice01.dart`, `dart_odyssey/src/exercice02.dart`, `dart_odyssey/src/exercice03.dart`, `dart_odyssey/src/exercice06.dart` *(+6 fichier(s))*
 
 ### Difficultés rencontrées
-- 
+- Erreur de build avec les métadonnées AAR (CheckAarMetadataWorkAction) liées aux dépendances.
+- Version de Gradle obsolète (8.9) pour charger les outils récents.
+- Blocage des liens symboliques (symlinks) par la sécurité Windows.
 
 ### Comment j'ai résolu le problème
-- 
+- Configuration et correction du fichier build.gradle.kts pour activer le desugaring.
+- Passage manuel à Gradle 8.13 dans le fichier gradle-wrapper.properties.
+- Activation du Mode Développeur dans les paramètres de Windows.
+- Implémentation des callbacks (onToggle, onDelete) et de setState pour dynamiser l'UI.
 
 ### Prévu pour la prochaine séance
-- 
-
+- Découverte de la persistance des données pour sauvegarder la To-Do List localement.
 ---
 
 ## Séance 4 — AAAA-MM-JJ

@@ -1,39 +1,49 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
+import '../screens/task_detail_screen.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
-  const TaskTile({super.key, required this.task});
+  final VoidCallback onToggle;
+  final VoidCallback onDelete;
+
+  const TaskTile({
+    super.key,
+    required this.task,
+    required this.onToggle,
+    required this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
-    IconData monIcone;
-    Color? maCouleur;
-    TextDecoration monStyleTexte;
-
-    if (task.isDone) { 
-      monIcone = Icons.check_circle;
-      maCouleur = Colors.green;
-      monStyleTexte = TextDecoration.lineThrough;
-    } else {
-      monIcone = Icons.radio_button_unchecked;
-      maCouleur = Colors.grey;
-      monStyleTexte = TextDecoration.none;
-    }
+    TextDecoration monStyleTexte =
+        task.isDone ? TextDecoration.lineThrough : TextDecoration.none;
+    Color maCouleurTexte = task.isDone ? Colors.grey : Colors.black;
 
     return ListTile(
-      leading: Icon(
-        monIcone,
-        color: maCouleur,
+      leading: Checkbox(
+        value: task.isDone,
+        onChanged: (bool? value) => onToggle(),
       ),
       title: Text(
         task.title,
         style: TextStyle(
           decoration: monStyleTexte,
-          color: task.isDone ? Colors.grey : Colors.black,
+          color: maCouleurTexte,
         ),
       ),
-      trailing: const Icon(Icons.chevron_right),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete, color: Colors.red),
+        onPressed: onDelete,
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TaskDetailScreen(task: task),
+          ),
+        );
+      },
     );
   }
 }
