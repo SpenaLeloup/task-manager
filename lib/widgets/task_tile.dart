@@ -16,40 +16,74 @@ class TaskTile extends StatelessWidget {
     required this.onEdit,
   });
 
+  Color _getPriorityColor() {
+    switch (task.priority) {
+      case Priority.high:
+        return Colors.red;
+      case Priority.normal:
+        return Colors.orange;
+      case Priority.low:
+        return Colors.green;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     TextDecoration monStyleTexte =
         task.isDone ? TextDecoration.lineThrough : TextDecoration.none;
     Color maCouleurTexte = task.isDone ? Colors.grey : Colors.black;
 
-    return ListTile(
-      leading: Checkbox(
-        value: task.isDone,
-        onChanged: (bool? value) => onToggle(),
-      ),
-      title: Text(
-        task.title,
-        style: TextStyle(decoration: monStyleTexte, color: maCouleurTexte),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      clipBehavior: Clip.antiAlias,
+      child: Row(
         children: [
-          IconButton(
-            icon: const Icon(Icons.edit, color: Colors.blue),
-            onPressed: onEdit,
+          Container(
+            width: 6,
+            height: 60,
+            decoration: BoxDecoration(
+              color: _getPriorityColor(),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(4),
+                bottomLeft: Radius.circular(4),
+              ),
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.delete, color: Colors.red),
-            onPressed: onDelete,
+          Expanded(
+            child: ListTile(
+              leading: Checkbox(
+                value: task.isDone,
+                onChanged: (bool? value) => onToggle(),
+              ),
+              title: Text(
+                task.title,
+                style:
+                    TextStyle(decoration: monStyleTexte, color: maCouleurTexte),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: Colors.blue),
+                    onPressed: onEdit,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: onDelete,
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TaskDetailScreen(task: task)),
+                );
+              },
+            ),
           ),
         ],
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => TaskDetailScreen(task: task)),
-        );
-      },
     );
   }
 }
