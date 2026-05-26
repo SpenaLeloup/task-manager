@@ -14,6 +14,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  Priority _selectedPriority = Priority.normal;
 
   @override
   void initState() {
@@ -21,6 +22,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     if (widget.taskToEdit != null) {
       _titleController.text = widget.taskToEdit!.title;
       _descriptionController.text = widget.taskToEdit!.description;
+      _selectedPriority = widget.taskToEdit!.priority;
     }
   }
 
@@ -34,13 +36,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       final newTask = Task(
-        // (cite: 240)
         id: widget.taskToEdit?.id ??
             DateTime.now().millisecondsSinceEpoch.toString(),
-        title: _titleController.text.trim(), // (cite: 241)
+        title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
         isDone: widget.taskToEdit?.isDone ?? false,
-        priority: widget.taskToEdit?.priority ?? Priority.normal,
+        priority: _selectedPriority,
       );
 
       Navigator.pop(context, newTask);
@@ -91,6 +92,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.notes),
                 ),
+              ),
+              const SizedBox(height: 16),
+              DropdownButtonFormField<Priority>(
+                value: _selectedPriority,
+                decoration: const InputDecoration(
+                  labelText: 'Priorité',
+                  prefixIcon: Icon(Icons.flag),
+                ),
+                items: const [
+                  DropdownMenuItem(value: Priority.low, child: Text('Basse')),
+                  DropdownMenuItem(
+                      value: Priority.normal, child: Text('Normale')),
+                  DropdownMenuItem(value: Priority.high, child: Text('Haute')),
+                ],
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() => _selectedPriority = value);
+                  }
+                },
               ),
               const SizedBox(height: 24),
               SizedBox(
