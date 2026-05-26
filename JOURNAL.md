@@ -180,20 +180,45 @@
 - Enfin passer à l'étape de l'implémentation de la persistance des données locale pour sauvegarder la liste de tâches même après la fermeture de l'application.
 ---
 
-## Séance 6 — AAAA-MM-JJ
+## Séance 6 — 2026-05-26
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD7`
+
+**Commits :**
+  - `feff622 plusieurs fichiers en lien avec les images`
+  - `087fbc6 ajout de l'image de l'icone de l'application et modification du fichier pubspec.yaml`
+  - `9e5e9cb ajout de l'image de l'icone de l'application et modification du fichier pubspec.yaml`
+  - `7b98d54 modification du fichier home_srceen.dart`
+  - `96e690e modification du fichier add_task_screen.dart`
+  - `333f1f5 modification du fichier task_tile.dart`
+  - `f643dca creation du fichier empy_state.dart pour les etats vide`
+  - `8b0f98a modification du main.dart`
+  - `32e6942 journal: sÃ©ance 5`
+  - `037856e modification du fichier home_screen.dart`
+  - `6c0b44d modification du fichier task_tile.dart`
+  - `7cb8aca modification du fichier task_detail_screen.dart`
+  - `c847658 modification du fichier add_task_screen`
+  - `17a70f9 modification du fichier task.dart`
+  - `f83d9e6 journal: sÃ©ance 4`
+  - `5adfb66 realisation du TD 5 en retard car absence au cours precedent`
+
+**Fichiers modifiés :** `android/app/src/main/res/mipmap-hdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-mdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-xhdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png`, `assets/icon/icon.png`, `ios/Runner.xcodeproj/project.pbxproj`, `ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json`, `ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png`, `ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png` *(+28 fichier(s))*
 
 ### Difficultés rencontrées
-- 
+- Centralisation et harmonisation de la charte graphique avec ThemeData.
+- Gestion de l'affichage conditionnel pour l'état vide afin de soigner l'expérience utilisateur.
+- Configuration et génération des icônes natives avec le package flutter_launcher_icons.
 
 ### Comment j'ai résolu le problème
-- 
+- Utilisation de ColorScheme.fromSeed dans main.dart pour générer une palette Material 3 cohérente.
+- Création d'un widget EmptyState et utilisation d'un opérateur ternaire dans HomeScreen.
+- Ajout d'un conteneur coloré dynamique dans TaskTile basé sur l'énumération de priorité.
+- Configuration du fichier pubspec.yaml et exécution de la commande dart run flutter_launcher_icons.
 
 ### Prévu pour la prochaine séance
-- 
-
+- J'aimerais enfin pouvoir faire l'implémentation de la persistance des données locale pour conserver les tâches après la fermeture de l'application.
 ---
 
 ## Bilan final
