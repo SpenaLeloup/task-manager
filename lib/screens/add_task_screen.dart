@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/providers/task_provider.dart';
 import '../models/task.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -35,7 +37,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      final newTask = Task(
+      final task = Task(
         id: widget.taskToEdit?.id ??
             DateTime.now().millisecondsSinceEpoch.toString(),
         title: _titleController.text.trim(),
@@ -44,7 +46,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         priority: _selectedPriority,
       );
 
-      Navigator.pop(context, newTask);
+      if (widget.taskToEdit == null) {
+        context.read<TaskProvider>().addTask(task);
+      } else {
+        context.read<TaskProvider>().updateTask(task);
+      }
+
+      Navigator.pop(context);
     }
   }
 
