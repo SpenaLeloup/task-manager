@@ -221,6 +221,43 @@
 - J'aimerais enfin pouvoir faire l'implémentation de la persistance des données locale pour conserver les tâches après la fermeture de l'application.
 ---
 
+## Séance 7 — AAAA-MM-JJ
+
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
+
+---
+
+## Séance 8 — AAAA-MM-JJ
+
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
+
+---
+
+
+
+
+---
+
 ## Bilan final
 
 ### Ce que j'ai appris durant ce projet
