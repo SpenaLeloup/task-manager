@@ -1,48 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/task_provider.dart';
 import '../models/task.dart';
 import '../widgets/task_tile.dart';
 import '../widgets/empty_state.dart';
 import 'add_task_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final List<Task> _tasks = [
-    Task(id: '1', title: 'Apprendre Flutter', isDone: true),
-    Task(id: '2', title: 'Créer ma première app', isDone: true),
-    Task(id: '3', title: 'Faire les courses'),
-    Task(id: '4', title: 'Lire 30 minutes'),
-    Task(id: '5', title: 'Faire du sport'),
-  ];
-
-  Future<void> _navigateToAddTask() async {
-    final newTask = await Navigator.pushNamed(context, '/add') as Task?;
-
-    if (newTask != null) {
-      setState(() {
-        _tasks.add(newTask);
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final taskProvider = context.watch<TaskProvider>();
+    final tasks = taskProvider.tasks;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            'Mes tâches (${_tasks.where((t) => !t.isDone).length} restantes)'),
+        title: Text('Mes tâches (${taskProvider.pendingCount} restantes)'),
       ),
-      body: _tasks.isEmpty
+      body: tasks.isEmpty
           ? const EmptyState()
           : ListView.builder(
-              itemCount: _tasks.length,
+              itemCount: tasks.length,
               itemBuilder: (context, index) {
-                final task = _tasks[index];
+                final task = tasks[index];
 
                 return Dismissible(
                   key: Key(task.id),
@@ -54,42 +35,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   onDismissed: (direction) {
-                    setState(() {
-                      _tasks.removeAt(index);
-                    });
+                    context.read<TaskProvider>().deleteTask(task.id);
                   },
                   child: TaskTile(
                     task: task,
                     onToggle: () {
-                      setState(() {
-                        _tasks[index].isDone = !_tasks[index].isDone;
-                      });
+                      context.read<TaskProvider>().toggleTask(task.id);
                     },
                     onDelete: () {
-                      setState(() {
-                        _tasks.removeAt(index);
-                      });
+                      context.read<TaskProvider>().deleteTask(task.id);
                     },
-                    onEdit: () async {
-                      final updatedTask = await Navigator.push<Task>(
+                    onEdit: () {
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => AddTaskScreen(taskToEdit: task),
                         ),
                       );
-
-                      if (updatedTask != null) {
-                        setState(() {
-                          _tasks[index] = updatedTask;
-                        });
-                      }
                     },
                   ),
                 );
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToAddTask,
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
         child: const Icon(Icons.add),
       ),
     );

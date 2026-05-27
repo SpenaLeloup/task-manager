@@ -9,8 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # Gestion d'état — séance 7
   provider: ^6.1.2
 
   # Persistance légère — séance 10
@@ -39,7 +37,3 @@ flutter_launcher_icons:
 
 flutter:
   uses-material-design: true
-
-  # Décommentez si vous ajoutez des assets (images, icônes…)
-  # assets:
-  #   - assets/icon/
