@@ -221,20 +221,45 @@
 - J'aimerais enfin pouvoir faire l'implémentation de la persistance des données locale pour conserver les tâches après la fermeture de l'application.
 ---
 
-## Séance 7 — AAAA-MM-JJ
+## Séance 7 — 2026-05-27
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD8`
+
+**Commits :**
+  - `0b010a7 ajout de nouvelles seance dans le journal`
+  - `e2367f5 modification de _submit() dans add_task_screen.dart`
+  - `ef39b3b migration de haome_screnn.dart`
+  - `b703aa8 enregistrement du provider dans le main`
+  - `008c619 creation de task_provider.dart`
+  - `b546ff2 modification de pubspec.yaml`
+  - `77df6cd modification de la couleur qui Ã©tait deja en place`
+  - `6087562 journal: sÃ©ance 6`
+  - `feff622 plusieurs fichiers en lien avec les images`
+  - `087fbc6 ajout de l'image de l'icone de l'application et modification du fichier pubspec.yaml`
+  - `9e5e9cb ajout de l'image de l'icone de l'application et modification du fichier pubspec.yaml`
+  - `7b98d54 modification du fichier home_srceen.dart`
+  - `96e690e modification du fichier add_task_screen.dart`
+  - `333f1f5 modification du fichier task_tile.dart`
+  - `f643dca creation du fichier empy_state.dart pour les etats vide`
+  - `8b0f98a modification du main.dart`
+
+**Fichiers modifiés :** `android/app/src/main/res/mipmap-hdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-mdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-xhdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png`, `android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png`, `assets/icon/S08.pdf`, `assets/icon/icon.png`, `ios/Runner.xcodeproj/project.pbxproj`, `ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json`, `ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png` *(+28 fichier(s))*
 
 ### Difficultés rencontrées
-- 
+- Compréhension des limitations de l'état local avec setState pour la scalabilité et le partage de données entre plusieurs écrans.
+- Erreur de type (_TypeError) lors du Hot Reload liée à la transformation brutale de HomeScreen de StatefulWidget en StatelessWidget.
+- Extraction et migration globale de toute la logique métier de la liste de tâches hors des widgets.
 
 ### Comment j'ai résolu le problème
-- 
+- Installation du package provider et création de la classe TaskProvider héritant de ChangeNotifier.
+- Utilisation de notifyListeners() pour déclencher la reconstruction automatique de l'interface graphique.
+- Résolution du crash de reassemble en effectuant un redémarrage complet (Hot Restart / touche R) de l'application.
+- Utilisation des méthodes context.watch() pour lire l'état et context.read() pour exécuter les actions sans rebuild inutile.
 
 ### Prévu pour la prochaine séance
-- 
-
+- - Découverte et implémentation de la persistance des données locale pour sauvegarder les tâches.
 ---
 
 ## Séance 8 — AAAA-MM-JJ
