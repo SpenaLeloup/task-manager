@@ -262,20 +262,38 @@
 - - Découverte et implémentation de la persistance des données locale pour sauvegarder les tâches.
 ---
 
-## Séance 8 — AAAA-MM-JJ
+## Séance 8 — 2026-05-29
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD9`
+
+**Commits :**
+  - `5713e54 fin du td9`
+  - `cff48c7 mise a jour du fichier home_screen`
+  - `11d6eed ajout de enum dans task_provider.task`
+  - `6030b6c journal: sÃ©ance 7`
+  - `0b010a7 ajout de nouvelles seance dans le journal`
+  - `e2367f5 modification de _submit() dans add_task_screen.dart`
+  - `ef39b3b migration de haome_screnn.dart`
+  - `b703aa8 enregistrement du provider dans le main`
+  - `008c619 creation de task_provider.dart`
+  - `b546ff2 modification de pubspec.yaml`
+
+**Fichiers modifiés :** `lib/main.dart`, `lib/providers/task_provider.dart`, `lib/screens/add_task_screen.dart`, `lib/screens/home_screen.dart`
 
 ### Difficultés rencontrées
-- 
+- Gestion du rafraîchissement asynchrone des onglets du TabBarView partageant la même source de données.
+- Synchronisation de l'état du filtre global de TaskProvider avec l'index actif du TabController.
+- Calcul en temps réel du taux de complétion et des compteurs indépendants pour les badges.
 
 ### Comment j'ai résolu le problème
-- 
+- Réimplémentation de HomeScreen en StatefulWidget avec le mixin SingleTickerProviderStateMixin pour contrôler finement le TabController.
+- Filtrage des listes de tâches directement au moment de leur passage en paramètre aux enfants de TabBarView (.where().toList()).
+- Implémentation de getters calculés (totalCount, pendingCount, completedCount, completionRate) dans TaskProvider.
 
 ### Prévu pour la prochaine séance
-- 
-
+- Implémentation de la persistance locale des données pour sauvegarder la liste de tâches à la fermeture.
 ---
 
 
