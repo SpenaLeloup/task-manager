@@ -104,9 +104,9 @@ class _HomeScreenState extends State<HomeScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                _buildTaskList(provider.tasks),
-                _buildTaskList(provider.tasks),
-                _buildTaskList(provider.tasks),
+                _buildTaskList(provider.tasks.toList()),
+                _buildTaskList(provider.tasks.where((t) => !t.isDone).toList()),
+                _buildTaskList(provider.tasks.where((t) => t.isDone).toList()),
               ],
             ),
           ),
