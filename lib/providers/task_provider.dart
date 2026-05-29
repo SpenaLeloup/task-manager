@@ -1,12 +1,47 @@
 import 'package:flutter/foundation.dart';
 import '../models/task.dart';
 
-class TaskProvider extends ChangeNotifier {
-  final List<Task> _tasks = [];
+enum TaskFilter { all, active, completed }
 
-  List<Task> get tasks => List.unmodifiable(_tasks);
+class TaskProvider extends ChangeNotifier {
+  final List<Task> _tasks = [
+    Task(id: '1', title: 'Apprendre Flutter', isDone: true),
+    Task(id: '2', title: 'Créer ma première app', isDone: true),
+    Task(id: '3', title: 'Faire les courses'),
+    Task(id: '4', title: 'Lire 30 minutes'),
+    Task(id: '5', title: 'Faire du sport'),
+  ];
+
+  TaskFilter _currentFilter = TaskFilter.all;
+
+  TaskFilter get currentFilter => _currentFilter;
+
+  void setFilter(TaskFilter filter) {
+    _currentFilter = filter;
+    notifyListeners();
+  }
+
+  List<Task> get tasks {
+    switch (_currentFilter) {
+      case TaskFilter.all:
+        return List.unmodifiable(_tasks);
+      case TaskFilter.active:
+        return List.unmodifiable(_tasks.where((t) => !t.isDone));
+      case TaskFilter.completed:
+        return List.unmodifiable(_tasks.where((t) => t.isDone));
+    }
+  }
+
+  int get totalCount => _tasks.length;
 
   int get pendingCount => _tasks.where((t) => !t.isDone).length;
+
+  int get completedCount => _tasks.where((t) => t.isDone).length;
+
+  double get completionRate {
+    if (_tasks.isEmpty) return 0.0;
+    return completedCount / _tasks.length;
+  }
 
   void addTask(Task task) {
     _tasks.add(task);
