@@ -325,6 +325,40 @@
 - Découverte et implémentation de la persistance locale des données pour enfin sauvegarder les tâches après la fermeture de l'application.
 ---
 
+
+## Séance 10 — AAAA-MM-JJ
+
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
+
+---
+
+
+## Séance 11 — AAAA-MM-JJ
+
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
+
+---
+
 ## Bilan final
 
 ### Ce que j'ai appris durant ce projet
