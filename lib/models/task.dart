@@ -12,6 +12,7 @@ class Task {
   String description;
   bool isDone;
   Priority priority;
+  final int createdAt;
 
   Task({
     required this.id,
@@ -19,7 +20,8 @@ class Task {
     this.description = '',
     this.isDone = false,
     this.priority = Priority.normal,
-  });
+    int? createdAt,
+  }) : this.createdAt = createdAt ?? DateTime.now().millisecondsSinceEpoch;
 
   Map<String, dynamic> toJson() {
     return {
@@ -28,6 +30,7 @@ class Task {
       'description': description,
       'isDone': isDone,
       'priority': priority.index,
+      'createdAt': createdAt,
     };
   }
 
@@ -38,6 +41,29 @@ class Task {
       description: json['description'] as String? ?? '',
       isDone: json['isDone'] as bool,
       priority: Priority.values[json['priority'] as int],
+      createdAt: json['createdAt'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'is_done': isDone ? 1 : 0,
+      'priority': priority.index,
+      'created_at': createdAt,
+    };
+  }
+
+  factory Task.fromMap(Map<String, dynamic> map) {
+    return Task(
+      id: map['id'] as String,
+      title: map['title'] as String,
+      description: map['description'] as String? ?? '',
+      isDone: (map['is_done'] as int) == 1,
+      priority: Priority.values[map['priority'] as int],
+      createdAt: map['created_at'] as int,
     );
   }
 }
