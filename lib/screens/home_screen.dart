@@ -71,6 +71,14 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     final provider = context.watch<TaskProvider>();
 
+    if (provider.isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Mes tâches (${provider.pendingCount} restantes)'),

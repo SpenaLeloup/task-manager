@@ -2,6 +2,10 @@ import 'dart:convert';
 
 enum Priority { low, normal, high }
 
+enum TaskFilter { all, active, completed }
+
+enum SortCriteria { createdDate, priority, alphabetical, completionStatus }
+
 class Task {
   final String id;
   String title;

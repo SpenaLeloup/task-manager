@@ -1,27 +1,17 @@
 import 'package:flutter/foundation.dart';
 import '../models/task.dart';
-
-enum TaskFilter { all, active, completed }
-
-enum SortCriteria { createdDate, priority, alphabetical, completionStatus }
+import '../services/storage_service.dart';
 
 class TaskProvider extends ChangeNotifier {
-  final List<Task> _tasks = [
-    Task(
-        id: '1',
-        title: 'Apprendre Flutter',
-        isDone: true,
-        priority: Priority.high),
-    Task(
-        id: '2',
-        title: 'Créer ma première app',
-        isDone: true,
-        priority: Priority.normal),
-    Task(id: '3', title: 'Faire les courses', priority: Priority.low),
-    Task(id: '4', title: 'Lire 30 minutes', priority: Priority.normal),
-    Task(id: '5', title: 'Faire du sport', priority: Priority.high),
-  ];
+  final List<Task> _tasks = [];
+  final StorageService _storage = StorageService();
+  bool _isLoading = true;
 
+  TaskProvider() {
+    _loadFromStorage();
+  }
+
+  bool get isLoading => _isLoading;
   TaskFilter _currentFilter = TaskFilter.all;
   SortCriteria _sortCriteria = SortCriteria.createdDate;
   bool _sortAscending = true;
@@ -29,6 +19,15 @@ class TaskProvider extends ChangeNotifier {
   TaskFilter get currentFilter => _currentFilter;
   SortCriteria get sortCriteria => _sortCriteria;
   bool get sortAscending => _sortAscending;
+
+  Future<void> _loadFromStorage() async {
+    final saved = await _storage.loadTasks();
+    _tasks.addAll(saved);
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> _save() => _storage.saveTasks(_tasks);
 
   void setFilter(TaskFilter filter) {
     _currentFilter = filter;
@@ -97,6 +96,7 @@ class TaskProvider extends ChangeNotifier {
 
   void addTask(Task task) {
     _tasks.add(task);
+    _save();
     notifyListeners();
   }
 
@@ -104,12 +104,14 @@ class TaskProvider extends ChangeNotifier {
     final index = _tasks.indexWhere((t) => t.id == id);
     if (index != -1) {
       _tasks[index].isDone = !_tasks[index].isDone;
+      _save();
       notifyListeners();
     }
   }
 
   void deleteTask(String id) {
     _tasks.removeWhere((t) => t.id == id);
+    _save();
     notifyListeners();
   }
 
@@ -117,6 +119,7 @@ class TaskProvider extends ChangeNotifier {
     final index = _tasks.indexWhere((t) => t.id == updatedTask.id);
     if (index != -1) {
       _tasks[index] = updatedTask;
+      _save();
       notifyListeners();
     }
   }
