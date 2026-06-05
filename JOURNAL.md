@@ -296,7 +296,19 @@
 - Implémentation de la persistance locale des données pour sauvegarder la liste de tâches à la fermeture.
 ---
 
+## Séance 9 — AAAA-MM-JJ
 
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
 
 
 ---
