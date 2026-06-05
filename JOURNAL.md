@@ -326,20 +326,36 @@
 ---
 
 
-## Séance 10 — AAAA-MM-JJ
+## Séance 10 — 2026-06-05
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD11`
+
+**Commits :**
+  - `e568860 ajout de sÃ©ances dans le joural`
+  - `e3ce7a5 passage de ListView en style declaratif car demandÃ© par le prof`
+  - `19f6b0f ajout de la persistance des donnÃ©es`
+  - `6bae7fa crÃ©ation de storage_service.dart`
+  - `eb4a162 modification de task.dart`
+  - `d61565b journal: sÃ©ance 9`
+  - `d73bd35 ajout d'ne sÃ©ance dans le journal`
+
+**Fichiers modifiés :** `lib/models/task.dart`, `lib/providers/task_provider.dart`, `lib/screens/home_screen.dart`, `lib/services/storage_service.dart`
 
 ### Difficultés rencontrées
-- 
+- Compréhension de la persistance de données locales et de la sérialisation/désérialisation JSON.
+- Conflits de positionnement des énumérations globales provoquant des erreurs de portée ("Type not found") à la compilation.
+- Adaptation de l'architecture pour respecter les exigences académiques spécifiques : passage d'un affichage impératif (ListView.builder) à un style déclaratif (.map()), et transition vers une mutation d'état contrôlée conservant les références mémoires des objets.
 
 ### Comment j'ai résolu le problème
-- 
+- Isolation de la persistance dans un StorageService utilisant shared_preferences.
+- Centralisation définitive de l'ensemble des enums (Priority, TaskFilter, SortCriteria) directement dans le modèle task.dart pour assurer leur visibilité globale.
+- Refactoring de la méthode _buildTaskList dans le HomeScreen avec un SingleChildScrollView et une Column alimentée par un mapping déclaratif (tasks.map).
+- Modification de la méthode updateTask du TaskProvider pour modifier les champs internes de l'objet existant au lieu de remplacer l'instance complète en mémoire.
 
 ### Prévu pour la prochaine séance
-- 
-
+- Poursuite du développement de l'application selon les directives du prochain TD
 ---
 
 
