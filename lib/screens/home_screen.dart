@@ -71,6 +71,14 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     final provider = context.watch<TaskProvider>();
 
+    if (provider.isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Mes tâches (${provider.pendingCount} restantes)'),
@@ -190,42 +198,41 @@ class _HomeScreenState extends State<HomeScreen>
       return const EmptyState();
     }
 
-    return ListView.builder(
-      itemCount: tasks.length,
-      itemBuilder: (context, index) {
-        final task = tasks[index];
-
-        return Dismissible(
-          key: Key(task.id),
-          direction: DismissDirection.endToStart,
-          background: Container(
-            color: Colors.red,
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.only(right: 16),
-            child: const Icon(Icons.delete, color: Colors.white),
-          ),
-          onDismissed: (direction) {
-            context.read<TaskProvider>().deleteTask(task.id);
-          },
-          child: TaskTile(
-            task: task,
-            onToggle: () {
-              context.read<TaskProvider>().toggleTask(task.id);
-            },
-            onDelete: () {
+    return SingleChildScrollView(
+      child: Column(
+        children: tasks.map((task) {
+          return Dismissible(
+            key: Key(task.id),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 16),
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            onDismissed: (direction) {
               context.read<TaskProvider>().deleteTask(task.id);
             },
-            onEdit: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddTaskScreen(taskToEdit: task),
-                ),
-              );
-            },
-          ),
-        );
-      },
+            child: TaskTile(
+              task: task,
+              onToggle: () {
+                context.read<TaskProvider>().toggleTask(task.id);
+              },
+              onDelete: () {
+                context.read<TaskProvider>().deleteTask(task.id);
+              },
+              onEdit: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddTaskScreen(taskToEdit: task),
+                  ),
+                );
+              },
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }
