@@ -296,21 +296,33 @@
 - Implémentation de la persistance locale des données pour sauvegarder la liste de tâches à la fermeture.
 ---
 
-## Séance 9 — AAAA-MM-JJ
+## Séance 9 — 2026-06-05
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD10`
+
+**Commits :**
+  - `d73bd35 ajout d'ne sÃ©ance dans le journal`
+  - `b93fbb0 mise a jour de task-tile.dart et home_screen.dart`
+  - `d86ac8c mise a jour de task_provider.dart`
+  - `269b61e journal: sÃ©ance 8`
+  - `5713e54 fin du td9`
+
+**Fichiers modifiés :** `lib/providers/task_provider.dart`, `lib/screens/home_screen.dart`, `lib/widgets/task_tile.dart`
 
 ### Difficultés rencontrées
-- 
+- Implémentation d'un algorithme de tri multi-critères dynamique (date, priorité, alphabet, statut) gérant l'inversion ascendant/descendant.
+- Erreur de syntaxe et perte des repères de l'analyseur Dart suite à l'oubli des crochets de liste dans la propriété children d'une Column.
+- Compréhension de la mutation des listes in-place avec la méthode .sort() en Dart.
 
 ### Comment j'ai résolu le problème
-- 
+- Utilisation de l'opérateur spread [...list] pour copier superficiellement le tableau avant d'appliquer le tri sans altérer la source.
+- Correction syntaxique de la fonction _showPriorityMenu en encapsulant proprement le .map().toList() dans les crochets du children.
+- Intégration d'un PopupMenuButton dans l'AppBar et d'un showModalBottomSheet déclenché par un GestureDetector (onLongPress).
 
 ### Prévu pour la prochaine séance
-- 
-
-
+- Découverte et implémentation de la persistance locale des données pour enfin sauvegarder les tâches après la fermeture de l'application.
 ---
 
 ## Bilan final
