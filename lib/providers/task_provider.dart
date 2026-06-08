@@ -1,14 +1,13 @@
 import 'package:flutter/foundation.dart';
 import '../models/task.dart';
-import '../services/storage_service.dart';
+import '../services/database_helper.dart';
 
 class TaskProvider extends ChangeNotifier {
   final List<Task> _tasks = [];
-  final StorageService _storage = StorageService();
   bool _isLoading = true;
 
   TaskProvider() {
-    _loadFromStorage();
+    _loadFromDatabase();
   }
 
   bool get isLoading => _isLoading;
@@ -20,14 +19,12 @@ class TaskProvider extends ChangeNotifier {
   SortCriteria get sortCriteria => _sortCriteria;
   bool get sortAscending => _sortAscending;
 
-  Future<void> _loadFromStorage() async {
-    final saved = await _storage.loadTasks();
+  Future<void> _loadFromDatabase() async {
+    final saved = await DatabaseHelper.instance.getAllTasks();
     _tasks.addAll(saved);
     _isLoading = false;
     notifyListeners();
   }
-
-  Future<void> _save() => _storage.saveTasks(_tasks);
 
   void setFilter(TaskFilter filter) {
     _currentFilter = filter;
@@ -42,6 +39,40 @@ class TaskProvider extends ChangeNotifier {
       _sortAscending = true;
     }
     notifyListeners();
+  }
+
+  Future<void> addTask(Task task) async {
+    await DatabaseHelper.instance.insertTask(task);
+    _tasks.add(task);
+    notifyListeners();
+  }
+
+  Future<void> toggleTask(String id) async {
+    final index = _tasks.indexWhere((t) => t.id == id);
+    if (index != -1) {
+      _tasks[index].isDone = !_tasks[index].isDone;
+      await DatabaseHelper.instance.updateTask(_tasks[index]);
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteTask(String id) async {
+    await DatabaseHelper.instance.deleteTask(id);
+    _tasks.removeWhere((t) => t.id == id);
+    notifyListeners();
+  }
+
+  Future<void> updateTask(Task updatedTask) async {
+    final index = _tasks.indexWhere((t) => t.id == updatedTask.id);
+    if (index != -1) {
+      _tasks[index].title = updatedTask.title;
+      _tasks[index].description = updatedTask.description;
+      _tasks[index].priority = updatedTask.priority;
+      _tasks[index].isDone = updatedTask.isDone;
+
+      await DatabaseHelper.instance.updateTask(_tasks[index]);
+      notifyListeners();
+    }
   }
 
   List<Task> get tasks {
@@ -62,7 +93,6 @@ class TaskProvider extends ChangeNotifier {
 
   List<Task> _sorted(List<Task> list) {
     final sorted = [...list];
-
     sorted.sort((a, b) {
       int cmp;
       switch (_sortCriteria) {
@@ -81,7 +111,6 @@ class TaskProvider extends ChangeNotifier {
       }
       return _sortAscending ? cmp : -cmp;
     });
-
     return List.unmodifiable(sorted);
   }
 
@@ -92,35 +121,5 @@ class TaskProvider extends ChangeNotifier {
   double get completionRate {
     if (_tasks.isEmpty) return 0.0;
     return completedCount / _tasks.length;
-  }
-
-  void addTask(Task task) {
-    _tasks.add(task);
-    _save();
-    notifyListeners();
-  }
-
-  void toggleTask(String id) {
-    final index = _tasks.indexWhere((t) => t.id == id);
-    if (index != -1) {
-      _tasks[index].isDone = !_tasks[index].isDone;
-      _save();
-      notifyListeners();
-    }
-  }
-
-  void deleteTask(String id) {
-    _tasks.removeWhere((t) => t.id == id);
-    _save();
-    notifyListeners();
-  }
-
-  void updateTask(Task updatedTask) {
-    final index = _tasks.indexWhere((t) => t.id == updatedTask.id);
-    if (index != -1) {
-      _tasks[index] = updatedTask;
-      _save();
-      notifyListeners();
-    }
   }
 }

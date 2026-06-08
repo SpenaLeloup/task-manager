@@ -11,9 +11,6 @@ dependencies:
     sdk: flutter
   provider: ^6.1.2
 
-  # Persistance légère — séance 10
-  shared_preferences: ^2.3.5
-
   # Base de données SQLite — séances 11 et 12
   sqflite: ^2.4.2
   path: ^1.9.0

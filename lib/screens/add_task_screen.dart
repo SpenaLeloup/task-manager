@@ -35,7 +35,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  void _submit() async {
     if (_formKey.currentState!.validate()) {
       final task = Task(
         id: widget.taskToEdit?.id ??
@@ -47,12 +47,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       );
 
       if (widget.taskToEdit == null) {
-        context.read<TaskProvider>().addTask(task);
+        await context.read<TaskProvider>().addTask(task);
       } else {
-        context.read<TaskProvider>().updateTask(task);
+        await context.read<TaskProvider>().updateTask(task);
       }
 
-      Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 

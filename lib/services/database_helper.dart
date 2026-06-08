@@ -78,4 +78,14 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  Future<List<Task>> searchTasks(String query) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      _tableName,
+      where: 'title LIKE ? OR description LIKE ?',
+      whereArgs: ['%$query%', '%$query%'],
+    );
+    return maps.map((map) => Task.fromMap(map)).toList();
+  }
 }
