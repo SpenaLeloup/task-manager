@@ -57,7 +57,6 @@ class DatabaseHelper {
       _tableName,
       orderBy: 'created_at ASC',
     );
-
     return maps.map((map) => Task.fromMap(map)).toList();
   }
 
