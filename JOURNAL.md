@@ -394,20 +394,40 @@
 - Migration définitive de la logique d'accès aux données du TaskProvider depuis SharedPreferences vers notre nouveau service SQLite.
 ---
 
-## Séance 12 — AAAA-MM-JJ
+## Séance 12 — 2026-06-08
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD13`
+
+**Commits :**
+  - `ec2d37b ajout de seance dans le journal`
+  - `c16f3e5 suppression de storage_service.dart`
+  - `0f0239a modification de task_provider.dart et home_screen.dart`
+  - `5268e0d creation de task_search_delegate.dart`
+  - `04a2264 modification de database_helper.dart`
+  - `f0ed58b mise a jour de pubspec.yaml`
+  - `c0d20fe modification du add_task-screen.dart`
+  - `8b6678a modification de task_provider.dart`
+  - `1b41065 journal: sÃ©ance 11`
+  - `bcb060d modification du main.dart`
+  - `02a5fa0 modification de database_helper.dart`
+
+**Fichiers modifiés :** `lib/main.dart`, `lib/providers/task_provider.dart`, `lib/screens/add_task_screen.dart`, `lib/screens/home_screen.dart`, `lib/services/database_helper.dart`, `lib/services/storage_service.dart`, `lib/widgets/task_search_delegate.dart`, `pubspec.lock`, `pubspec.yaml`
 
 ### Difficultés rencontrées
-- 
+- Transition d'une architecture synchrone (SharedPreferences) vers un flux de données asynchrone (SQLite) dans le TaskProvider.
+- Résolution de conflits de syntaxe lors du mapping déclaratif dans la Column de HomeScreen (imbrication de listes).
+- Gestion des résidus de fichiers obsolètes (StorageService) qui bloquaient la compilation.
 
 ### Comment j'ai résolu le problème
-- 
+- Implémentation d'une stratégie de cache mémoire où SQLite sert de source de vérité et la liste locale sert de cache.
+- Utilisation du spread operator (...) pour aplatir la liste générée par le .map().toList() dans la Column de HomeScreen.
+- Suppression définitive du fichier storage_service.dart et retrait de la dépendance dans le pubspec.yaml.
+- Utilisation de SearchDelegate couplé à un FutureBuilder pour interroger la base via l'opérateur LIKE.
 
 ### Prévu pour la prochaine séance
-- 
-
+- Découverte et intégration du système de notifications locales (flutter_local_notifications) pour gérer les rappels de tâches.
 ---
 
 ## Séance 13 — AAAA-MM-JJ
