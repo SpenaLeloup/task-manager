@@ -359,20 +359,39 @@
 ---
 
 
-## Séance 11 — AAAA-MM-JJ
+## Séance 11 — 2026-06-08
 
 ### Travail effectué
-- 
+
+**Branche :** `seance-TD12`
+
+**Commits :**
+  - `bcb060d modification du main.dart`
+  - `02a5fa0 modification de database_helper.dart`
+  - `da21b93 creation de database_helper.dart`
+  - `beedb7f modification de task.dart`
+  - `5218ece journal; sÃ©ance 10`
+  - `e568860 ajout de sÃ©ances dans le joural`
+  - `e3ce7a5 passage de ListView en style declaratif car demandÃ© par le prof`
+  - `19f6b0f ajout de la persistance des donnÃ©es`
+  - `6bae7fa crÃ©ation de storage_service.dart`
+  - `eb4a162 modification de task.dart`
+  - `d61565b journal: sÃ©ance 9`
+  - `d73bd35 ajout d'ne sÃ©ance dans le journal`
+
+**Fichiers modifiés :** `lib/main.dart`, `lib/models/task.dart`, `lib/providers/task_provider.dart`, `lib/screens/home_screen.dart`, `lib/services/database_helper.dart`, `lib/services/storage_service.dart`
 
 ### Difficultés rencontrées
-- 
+- Gestion des types de données spécifiques à SQLite, notamment l'absence de type BOOLEAN natif obligeant à sérialiser les états à l'aide d'un entier (0 ou 1).
+- Compréhension de l'asynchronisme lors de l'ouverture et de l'initialisation concurrente de la base de données.
 
 ### Comment j'ai résolu le problème
-- 
+- Implémentation du pattern Singleton dans le DatabaseHelper pour centraliser l'accès et éviter les conflits d'ouverture de connexions.
+- Enrichissement du modèle Task avec les méthodes toMap() et fromMap() pour encapsuler la conversion réciproque des booléens en entiers.
+- Initialisation forcée du Helper au démarrage de l'application via WidgetsFlutterBinding.ensureInitialized().
 
 ### Prévu pour la prochaine séance
-- 
-
+- Migration définitive de la logique d'accès aux données du TaskProvider depuis SharedPreferences vers notre nouveau service SQLite.
 ---
 
 ## Bilan final
