@@ -4,6 +4,7 @@ import '../providers/task_provider.dart';
 import '../models/task.dart';
 import '../widgets/task_tile.dart';
 import '../widgets/empty_state.dart';
+import '../widgets/task_search_delegate.dart';
 import 'add_task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -83,6 +84,14 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         title: Text('Mes tâches (${provider.pendingCount} restantes)'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Rechercher',
+            onPressed: () => showSearch(
+              context: context,
+              delegate: TaskSearchDelegate(),
+            ),
+          ),
           PopupMenuButton<SortCriteria>(
             icon: const Icon(Icons.sort),
             tooltip: 'Trier par',
@@ -164,9 +173,11 @@ class _HomeScreenState extends State<HomeScreen>
                         : Icons.arrow_downward,
                     size: 16,
                   ),
-                  onDeleted: () => context
-                      .read<TaskProvider>()
-                      .setSortCriteria(SortCriteria.createdDate),
+                  onDeleted: () {
+                    context
+                        .read<TaskProvider>()
+                        .setSortCriteria(SortCriteria.createdDate);
+                  },
                   deleteIcon: const Icon(Icons.close, size: 16),
                 ),
               ],

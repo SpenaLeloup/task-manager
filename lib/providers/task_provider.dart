@@ -26,6 +26,21 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setFilter(TaskFilter filter) {
+    _currentFilter = filter;
+    notifyListeners();
+  }
+
+  void setSortCriteria(SortCriteria criteria) {
+    if (_sortCriteria == criteria) {
+      _sortAscending = !_sortAscending;
+    } else {
+      _sortCriteria = criteria;
+      _sortAscending = true;
+    }
+    notifyListeners();
+  }
+
   Future<void> addTask(Task task) async {
     await DatabaseHelper.instance.insertTask(task);
     _tasks.add(task);
