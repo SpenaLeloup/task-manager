@@ -394,6 +394,38 @@
 - Migration définitive de la logique d'accès aux données du TaskProvider depuis SharedPreferences vers notre nouveau service SQLite.
 ---
 
+## Séance 12 — AAAA-MM-JJ
+
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
+
+---
+
+## Séance 13 — AAAA-MM-JJ
+
+### Travail effectué
+- 
+
+### Difficultés rencontrées
+- 
+
+### Comment j'ai résolu le problème
+- 
+
+### Prévu pour la prochaine séance
+- 
+
+---
+
 ## Bilan final
 
 ### Ce que j'ai appris durant ce projet
