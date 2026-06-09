@@ -37,7 +37,8 @@ class DatabaseHelper {
         description TEXT NOT NULL DEFAULT '',
         is_done INTEGER NOT NULL DEFAULT 0,
         priority INTEGER NOT NULL DEFAULT 1,
-        created_at INTEGER NOT NULL
+        created_at INTEGER NOT NULL,
+        due_date INTEGER
       )
     ''');
   }
