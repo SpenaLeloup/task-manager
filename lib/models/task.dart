@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 enum Priority { low, normal, high }
 
 enum TaskFilter { all, active, completed }
@@ -23,7 +21,7 @@ class Task {
     this.priority = Priority.normal,
     int? createdAt,
     this.dueDate,
-  }) : this.createdAt = createdAt ?? DateTime.now().millisecondsSinceEpoch;
+  }) : createdAt = createdAt ?? DateTime.now().millisecondsSinceEpoch;
 
   Map<String, dynamic> toJson() {
     return {

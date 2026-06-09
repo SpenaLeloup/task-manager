@@ -47,7 +47,7 @@ class TaskTile extends StatelessWidget {
     return Chip(
       label: Text(label, style: TextStyle(fontSize: 11, color: color)),
       avatar: Icon(Icons.flag, size: 14, color: color),
-      backgroundColor: color.withOpacity(0.1),
+      backgroundColor: color.withValues(alpha: 0.1),
       side: BorderSide.none,
       padding: EdgeInsets.zero,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

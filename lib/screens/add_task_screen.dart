@@ -82,9 +82,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         await context.read<TaskProvider>().updateTask(task);
       }
 
-      if (mounted) {
-        Navigator.pop(context);
-      }
+      if (!mounted) return;
+
+      Navigator.pop(context);
     }
   }
 
@@ -135,7 +135,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<Priority>(
-                value: _selectedPriority,
+                initialValue: _selectedPriority,
                 decoration: const InputDecoration(
                   labelText: 'Priorité',
                   prefixIcon: Icon(Icons.flag),
