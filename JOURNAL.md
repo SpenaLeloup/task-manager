@@ -449,10 +449,13 @@
 ## Bilan final
 
 ### Ce que j'ai appris durant ce projet
-- 
+- J'ai appris à concevoir, faire évoluer et interroger une base de données locale relationnelle SQLite au sein d'une application mobile, en abandonnant les solutions de stockage basiques comme SharedPreferences.
+- J'ai compris l'importance de découpler strictement l'interface graphique (les widgets) de la logique métier (le cache mémoire et les appels asynchrones à la base) en utilisant le package Provider.
+- L'utilisation intensive des structures Future, des mots-clés async / await et des widgets comme FutureBuilder m'a permis de comprendre comment réaliser des tâches lourdes en arrière-plan sans jamais bloquer ou figer l'expérience utilisateur.
 
 ### Ce que je ferais différemment si je recommençais
 - 
 
 ### Fonctionnalités que je n'ai pas eu le temps d'implémenter
+- L'intégration complète du package flutter_local_notifications pour planifier des alertes sur l'appareil 30 minutes avant l'échéance d'une tâche.
 - 
