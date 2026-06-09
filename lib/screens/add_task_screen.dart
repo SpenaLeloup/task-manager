@@ -17,6 +17,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   Priority _selectedPriority = Priority.normal;
+  DateTime? _selectedDueDate;
 
   @override
   void initState() {
@@ -25,6 +26,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       _titleController.text = widget.taskToEdit!.title;
       _descriptionController.text = widget.taskToEdit!.description;
       _selectedPriority = widget.taskToEdit!.priority;
+      _selectedDueDate = widget.taskToEdit!.dueDate;
     }
   }
 
@@ -33,6 +35,35 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickDueDate() async {
+    final now = DateTime.now();
+    final date = await showDatePicker(
+      context: context,
+      initialDate: _selectedDueDate ?? now,
+      firstDate: now,
+      lastDate: now.add(const Duration(days: 365 * 2)),
+    );
+
+    if (date == null) return;
+
+    if (!mounted) return;
+
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(_selectedDueDate ?? now),
+    );
+
+    setState(() {
+      _selectedDueDate = time == null
+          ? date
+          : DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    });
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} à ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
   }
 
   void _submit() async {
@@ -44,6 +75,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         description: _descriptionController.text.trim(),
         isDone: widget.taskToEdit?.isDone ?? false,
         priority: _selectedPriority,
+        dueDate: _selectedDueDate,
       );
 
       if (widget.taskToEdit == null) {
@@ -52,9 +84,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         await context.read<TaskProvider>().updateTask(task);
       }
 
-      if (mounted) {
-        Navigator.pop(context);
-      }
+      if (!mounted) return;
+
+      Navigator.pop(context);
     }
   }
 
@@ -105,7 +137,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<Priority>(
-                value: _selectedPriority,
+                initialValue: _selectedPriority,
                 decoration: const InputDecoration(
                   labelText: 'Priorité',
                   prefixIcon: Icon(Icons.flag),
@@ -121,6 +153,23 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     setState(() => _selectedPriority = value);
                   }
                 },
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: const Icon(Icons.calendar_today),
+                title: Text(
+                  _selectedDueDate == null
+                      ? "Aucune date d'échéance"
+                      : "Échéance : ${_formatDate(_selectedDueDate!)}",
+                ),
+                trailing: _selectedDueDate != null
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () =>
+                            setState(() => _selectedDueDate = null),
+                      )
+                    : null,
+                onTap: _pickDueDate,
               ),
               const SizedBox(height: 24),
               SizedBox(

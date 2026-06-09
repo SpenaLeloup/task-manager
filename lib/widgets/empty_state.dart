@@ -12,7 +12,8 @@ class EmptyState extends StatelessWidget {
           Icon(
             Icons.check_circle_outline,
             size: 80,
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.4),
+            color: Theme.of(context).colorScheme.primary
+              ..withValues(alpha: 0.4),
           ),
           const SizedBox(height: 16),
           Text(

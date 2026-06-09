@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 enum Priority { low, normal, high }
 
 enum TaskFilter { all, active, completed }
@@ -13,6 +11,7 @@ class Task {
   bool isDone;
   Priority priority;
   final int createdAt;
+  DateTime? dueDate;
 
   Task({
     required this.id,
@@ -21,7 +20,8 @@ class Task {
     this.isDone = false,
     this.priority = Priority.normal,
     int? createdAt,
-  }) : this.createdAt = createdAt ?? DateTime.now().millisecondsSinceEpoch;
+    this.dueDate,
+  }) : createdAt = createdAt ?? DateTime.now().millisecondsSinceEpoch;
 
   Map<String, dynamic> toJson() {
     return {
@@ -31,6 +31,7 @@ class Task {
       'isDone': isDone,
       'priority': priority.index,
       'createdAt': createdAt,
+      'due_date': dueDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -42,6 +43,9 @@ class Task {
       isDone: json['isDone'] as bool,
       priority: Priority.values[json['priority'] as int],
       createdAt: json['createdAt'] as int?,
+      dueDate: json['due_date'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(json['due_date'] as int)
+          : null,
     );
   }
 
@@ -53,6 +57,7 @@ class Task {
       'is_done': isDone ? 1 : 0,
       'priority': priority.index,
       'created_at': createdAt,
+      'due_date': dueDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -64,6 +69,9 @@ class Task {
       isDone: (map['is_done'] as int) == 1,
       priority: Priority.values[map['priority'] as int],
       createdAt: map['created_at'] as int,
+      dueDate: map['due_date'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['due_date'] as int)
+          : null,
     );
   }
 }
