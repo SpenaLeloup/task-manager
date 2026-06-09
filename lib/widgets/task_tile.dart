@@ -54,6 +54,10 @@ class TaskTile extends StatelessWidget {
     );
   }
 
+  String _formatDate(DateTime date) {
+    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year} à ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  }
+
   void _showPriorityMenu(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -70,6 +74,7 @@ class TaskTile extends StatelessWidget {
                       description: task.description,
                       isDone: task.isDone,
                       priority: p,
+                      dueDate: task.dueDate,
                     );
                     context.read<TaskProvider>().updateTask(updated);
                     Navigator.pop(context);
@@ -86,6 +91,10 @@ class TaskTile extends StatelessWidget {
         task.isDone ? TextDecoration.lineThrough : TextDecoration.none;
     Color maCouleurTexte = task.isDone ? Colors.grey : Colors.black;
 
+    final isOverdue = task.dueDate != null &&
+        task.dueDate!.isBefore(DateTime.now()) &&
+        !task.isDone;
+
     return GestureDetector(
       onLongPress: () => _showPriorityMenu(context),
       child: Card(
@@ -99,7 +108,23 @@ class TaskTile extends StatelessWidget {
             task.title,
             style: TextStyle(decoration: monStyleTexte, color: maCouleurTexte),
           ),
-          subtitle: _priorityChip(),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _priorityChip(),
+              if (task.dueDate != null) ...[
+                const SizedBox(height: 4),
+                Text(
+                  'Échéance : ${_formatDate(task.dueDate!)}',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isOverdue ? Colors.red : Colors.grey,
+                    fontWeight: isOverdue ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+              ],
+            ],
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -117,7 +142,8 @@ class TaskTile extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => TaskDetailScreen(task: task)),
+                builder: (context) => TaskDetailScreen(task: task),
+              ),
             );
           },
         ),
